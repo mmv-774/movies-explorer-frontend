@@ -1,4 +1,5 @@
 import Main from '../Main/Main';
+import NavTab from '../NavTab/NavTab';
 import Promo from '../Promo/Promo';
 import './App.css';
 
@@ -7,6 +8,7 @@ const App = () => {
     <div className='app'>
       <Main>
         <Promo />
+        <NavTab />
       </Main>
     </div>
   );
