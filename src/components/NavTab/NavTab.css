@@ -18,6 +18,7 @@
 }
 
 .nav-tab__list-item {
+  display: block;
   margin-right: 40px;
 }
 

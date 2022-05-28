@@ -1,0 +1,26 @@
+.section-header {
+  border-bottom: 1px solid #000;
+}
+
+.section-header__title {
+  max-width: 600px;
+  margin: 0 0 23px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+  .section-header__title {
+    max-width: calc(284px + (600 - 284) * (100vw - 320px) / (768 - 320));
+    font-size: calc(18px + (22 - 18) * (100vw - 320px) / (768 - 320));
+    margin-bottom: calc(28px + (23 - 28) * (100vw - 320px) / (768 - 320));
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .section-header__title {
+    line-height: 22px;
+  }
+}
