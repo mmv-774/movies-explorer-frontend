@@ -1,5 +1,5 @@
 import SectionHeader from '../SectionHeader/SectionHeader';
-import photo from '../../images/photo.jpeg';
+import photo from '../../images/about-me-photo.jpeg';
 import './AboutMe.css';
 
 const AboutMe = () => {
