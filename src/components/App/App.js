@@ -1,3 +1,4 @@
+import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
 import Main from '../Main/Main';
 import NavTab from '../NavTab/NavTab';
@@ -13,6 +14,7 @@ const App = () => {
         <NavTab />
         <AboutProject />
         <Techs />
+        <AboutMe />
       </Main>
     </div>
   );
