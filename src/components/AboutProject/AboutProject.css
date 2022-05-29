@@ -135,7 +135,7 @@
   }
 }
 
-@media screen and (max-width: 625px) {
+@media screen and (max-width: 675px) {
   .about-project__description-list {
     flex-direction: column;
     align-items: center;

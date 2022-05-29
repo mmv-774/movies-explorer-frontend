@@ -2,6 +2,7 @@ import AboutProject from '../AboutProject/AboutProject';
 import Main from '../Main/Main';
 import NavTab from '../NavTab/NavTab';
 import Promo from '../Promo/Promo';
+import Techs from '../Techs/Techs';
 import './App.css';
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
         <Promo />
         <NavTab />
         <AboutProject />
+        <Techs />
       </Main>
     </div>
   );
