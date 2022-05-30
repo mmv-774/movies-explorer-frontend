@@ -12,8 +12,8 @@ const AboutMe = () => {
             <h3 className='about-me__info-name'>Михаил</h3>
             <p className='about-me__info-prof'>Фронтенд-разработчик, 28 лет</p>
             <p className='about-me__info-bio'>
-              Я родился и живу в Челябинске. Начал кодить в 2015. Закончил курс в Яндекс.Практикум по специальности
-              Веб-разработчик.
+              Я родился и живу в Челябинске. Занимаюсь программированием с 2011 года. В данный момент работаю .NET
+              разработчиком.
             </p>
             <ul className='about-me__list'>
               <li className='about-me__list-item'>
