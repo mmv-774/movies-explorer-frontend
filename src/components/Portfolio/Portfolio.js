@@ -2,7 +2,7 @@ import './Portfolio.css';
 
 const Portfolio = () => {
   return (
-    <div className='portfolio'>
+    <section className='portfolio'>
       <div className='portfolio__wrapper'>
         <h2 className='portfolio__title'>Портфолио</h2>
         <ul className='portfolio__list'>
@@ -11,7 +11,7 @@ const Portfolio = () => {
               href='https://github.com/mmv-774/how-to-learn/'
               target='_blank'
               rel='noopener noreferrer'
-              className='portfolio__link'
+              className='portfolio__link animated-link'
             >
               <span className='portfolio__link-text'>Статичный сайт</span>
               <span className='portfolio__link-mnemonic'>&#8599;</span>
@@ -22,7 +22,7 @@ const Portfolio = () => {
               href='https://github.com/mmv-774/russian-travel/'
               target='_blank'
               rel='noopener noreferrer'
-              className='portfolio__link'
+              className='portfolio__link animated-link'
             >
               <span className='portfolio__link-text'>Адаптивный сайт</span>
               <span className='portfolio__link-mnemonic'>&#8599;</span>
@@ -33,7 +33,7 @@ const Portfolio = () => {
               href='https://github.com/mmv-774/react-mesto-api-full/'
               target='_blank'
               rel='noopener noreferrer'
-              className='portfolio__link'
+              className='portfolio__link animated-link'
             >
               <span className='portfolio__link-text'>Одностраничное приложение</span>
               <span className='portfolio__link-mnemonic'>&#8599;</span>
@@ -41,7 +41,7 @@ const Portfolio = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -14,9 +14,9 @@
 
 @media screen and (max-width: 768px) {
   .section-header__title {
-    max-width: calc(284px + (600 - 284) * (100vw - 320px) / (768 - 320));
-    font-size: calc(18px + (22 - 18) * (100vw - 320px) / (768 - 320));
-    margin-bottom: calc(28px + (23 - 28) * (100vw - 320px) / (768 - 320));
+    max-width: calc(284px + (600 - 284) * var(--md));
+    font-size: calc(18px + (22 - 18) * var(--md));
+    margin-bottom: calc(28px + (23 - 28) * var(--md));
   }
 }
 

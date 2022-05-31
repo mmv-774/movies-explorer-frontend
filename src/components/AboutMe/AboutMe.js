@@ -4,7 +4,7 @@ import './AboutMe.css';
 
 const AboutMe = () => {
   return (
-    <div className='about-me'>
+    <section className='about-me'>
       <div className='about-me__wrapper'>
         <SectionHeader title={'Студент'} />
         <div className='about-me__content'>
@@ -17,7 +17,12 @@ const AboutMe = () => {
             </p>
             <ul className='about-me__list'>
               <li className='about-me__list-item'>
-                <a href='https://facebook.com/' target='_blank' rel='noopener noreferrer' className='about-me__link'>
+                <a
+                  href='https://facebook.com/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='about-me__link animated-link'
+                >
                   Facebook
                 </a>
               </li>
@@ -26,7 +31,7 @@ const AboutMe = () => {
                   href='https://github.com/mmv-774'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='about-me__link'
+                  className='about-me__link animated-link'
                 >
                   Github
                 </a>
@@ -36,7 +41,7 @@ const AboutMe = () => {
           <img src={photo} alt='Фото студента' className='about-me__photo' />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -9,4 +9,6 @@
   font-family: 'Inter', Arial, sans-serif;
   color: #000;
   background-color: #fff;
+  --md: calc((100vw - 320px) / (768 - 320));
+  --lg: calc((100vw - 768px) / (1280 - 768));
 }

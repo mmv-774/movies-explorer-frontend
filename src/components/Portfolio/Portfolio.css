@@ -44,11 +44,6 @@
   justify-content: space-between;
   text-decoration: none;
   color: #000;
-  transition: opacity 0.2s linear;
-}
-
-.portfolio__link:hover {
-  opacity: 0.7;
 }
 
 .portfolio__link-text {
@@ -67,29 +62,29 @@
 
 @media screen and (max-width: 1280px) {
   .portfolio__wrapper {
-    max-width: calc(668px + (1140 - 668) * (100vw - 768px) / (1280 - 768));
-    padding-bottom: calc(80px + (115 - 80) * (100vw - 768px) / (1280 - 768));
+    max-width: calc(668px + (1140 - 668) * var(--lg));
+    padding-bottom: calc(80px + (115 - 80) * var(--lg));
   }
 }
 
 @media screen and (max-width: 768px) {
   .portfolio__wrapper {
-    max-width: calc(292px + (668 - 292) * (100vw - 320px) / (768 - 320));
-    padding-bottom: calc(70px + (80 - 70) * (100vw - 320px) / (768 - 320));
+    max-width: calc(292px + (668 - 292) * var(--md));
+    padding-bottom: calc(70px + (80 - 70) * var(--md));
   }
 
   .portfolio__title {
-    margin-bottom: calc(40px + (50 - 40) * (100vw - 320px) / (768 - 320));
-    font-size: calc(14px + (18 - 14) * (100vw - 320px) / (768 - 320));
+    margin-bottom: calc(40px + (50 - 40) * var(--md));
+    font-size: calc(14px + (18 - 14) * var(--md));
   }
 
   .portfolio__link-text {
-    font-size: calc(18px + (28 - 18) * (100vw - 320px) / (768 - 320));
-    line-height: calc(28px + (50 - 28) * (100vw - 320px) / (768 - 320));
+    font-size: calc(18px + (28 - 18) * var(--md));
+    line-height: calc(28px + (50 - 28) * var(--md));
   }
 
   .portfolio__link-mnemonic {
-    font-size: calc(18px + (28 - 18) * (100vw - 320px) / (768 - 320));
-    line-height: calc(28px + (60 - 28) * (100vw - 320px) / (768 - 320));
+    font-size: calc(18px + (28 - 18) * var(--md));
+    line-height: calc(28px + (60 - 28) * var(--md));
   }
 }

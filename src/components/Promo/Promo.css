@@ -27,14 +27,14 @@
 
 @media screen and (max-width: 768px) {
   .promo__title {
-    max-width: calc(300px + (730 - 300) * (100vw - 320px) / (768 - 320));
-    font-size: calc(31px + (50 - 31) * (100vw - 320px) / (768 - 320));
-    line-height: calc(39px + (58 - 39) * (100vw - 320px) / (768 - 320));
+    max-width: calc(300px + (730 - 300) * var(--md));
+    font-size: calc(31px + (50 - 31) * var(--md));
+    line-height: calc(39px + (58 - 39) * var(--md));
   }
 
   .promo__wrapper {
-    padding-top: calc(207px + (224 - 207) * (100vw - 320px) / (768 - 320));
-    padding-bottom: calc(240px + (240 - 246) * (100vw - 320px) / (768 - 320));
-    background-size: calc(248px + (320 - 248) * (100vw - 320px) / (768 - 320));
+    padding-top: calc(207px + (224 - 207) * var(--md));
+    padding-bottom: calc(240px + (240 - 246) * var(--md));
+    background-size: calc(248px + (320 - 248) * var(--md));
   }
 }

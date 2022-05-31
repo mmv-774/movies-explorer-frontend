@@ -87,17 +87,17 @@
 
 @media screen and (max-width: 1280px) {
   .about-project__wrapper {
-    max-width: calc(668px + (1140 - 668) * (100vw - 768px) / (1280 - 768));
-    padding: calc(90px + (110 - 90) * (100vw - 768px) / (1280 - 768)) 0;
+    max-width: calc(668px + (1140 - 668) * var(--lg));
+    padding: calc(90px + (110 - 90) * var(--lg)) 0;
   }
 
   .about-project__description-list-item {
-    max-width: calc(319px + (550 - 319) * (100vw - 768px) / (1280 - 768));
-    margin-right: calc(30px + (40 - 30) * (100vw - 768px) / (1280 - 768));
+    max-width: calc(319px + (550 - 319) * var(--lg));
+    margin-right: calc(30px + (40 - 30) * var(--lg));
   }
 
   .about__description-title {
-    margin: 0 0 calc(22px + (26 - 22) * (100vw - 768px) / (1280 - 768));
+    margin: 0 0 calc(22px + (26 - 22) * var(--lg));
   }
 
   .about__description-text {
@@ -106,32 +106,32 @@
   }
 
   .about-project__timeline-list {
-    margin-top: calc(93px + (110 - 93) * (100vw - 768px) / (1280 - 768));
+    margin-top: calc(93px + (110 - 93) * var(--lg));
   }
 }
 
 @media screen and (max-width: 768px) {
   .about-project__wrapper {
-    max-width: calc(292px + (668 - 292) * (100vw - 320px) / (768 - 320));
-    padding: calc(70px + (90 - 70) * (100vw - 320px) / (768 - 320)) 0;
+    max-width: calc(292px + (668 - 292) * var(--md));
+    padding: calc(70px + (90 - 70) * var(--md)) 0;
   }
 
   .about-project__description-list {
-    margin-top: calc(60px + (70 - 60) * (100vw - 320px) / (768 - 320));
+    margin-top: calc(60px + (70 - 60) * var(--md));
   }
 
   .about__description-title {
-    margin-bottom: calc(16px + (22 - 16) * (100vw - 320px) / (768 - 320));
-    font-size: calc(20px + (20 - 18) * (100vw - 320px) / (768 - 320));
+    margin-bottom: calc(16px + (22 - 16) * var(--md));
+    font-size: calc(20px + (20 - 18) * var(--md));
   }
 
   .about-project__timeline-list {
-    margin-top: calc(60px + (93 - 60) * (100vw - 320px) / (768 - 320));
+    margin-top: calc(60px + (93 - 60) * var(--md));
   }
 
   .about-project__timeline-title,
   .about-project__timeline-subtitle {
-    font-size: calc(11px + (14 - 11) * (100vw - 320px) / (768 - 320));
+    font-size: calc(11px + (14 - 11) * var(--md));
   }
 }
 
