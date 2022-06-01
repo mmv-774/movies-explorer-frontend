@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px;
+  box-sizing: border-box;
+  background: inherit;
+}
+
+@media screen and (max-width: 1280px) {
+  .header {
+    padding: 18px calc(30px + (70 - 30) * var(--lg));
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px calc(14px + (30 - 14) * var(--md));
+  }
+}
