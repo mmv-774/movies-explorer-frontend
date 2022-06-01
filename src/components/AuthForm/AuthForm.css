@@ -10,6 +10,12 @@
   row-gap: 40px;
 }
 
+.auth-form__logo {
+  display: block;
+  width: 38px;
+  height: 38px;
+}
+
 .auth-form__tittle {
   margin: 0;
   font-weight: 500;
