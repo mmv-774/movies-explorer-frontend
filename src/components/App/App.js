@@ -2,6 +2,7 @@ import AuthForm from '../AuthForm/AuthForm';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
+import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import './App.css';
 
@@ -12,6 +13,7 @@ const App = () => {
       {/* <Movies /> */}
       {/* <Register /> */}
       {/* <Login /> */}
+      {/* <Profile /> */}
     </div>
   );
 };

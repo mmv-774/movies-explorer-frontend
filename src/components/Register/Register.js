@@ -6,7 +6,7 @@ const Register = () => {
       title={'Добро пожаловать!'}
       submit={'Зарегистрироваться'}
       text={'Уже зарегистрированы?'}
-      linkTo={'/sign-in'}
+      linkTo={'/signin'}
       linkText={'Войти'}
     >
       <label htmlFor='name' className='auth-form__label'>

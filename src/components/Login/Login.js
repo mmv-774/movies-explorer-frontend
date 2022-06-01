@@ -6,7 +6,7 @@ const Login = () => {
       title={'Рады видеть!'}
       submit={'Войти'}
       text={'Ещё не зарегистрированы?'}
-      linkTo={'/sign-up'}
+      linkTo={'/signup'}
       linkText={'Регистрация'}
     >
       <label htmlFor='email' className='auth-form__label'>

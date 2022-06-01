@@ -1,6 +1,8 @@
 .auth-form {
   max-width: 396px;
-  margin: 70px auto;
+  margin: 0 auto;
+  padding: 70px 0;
+  box-sizing: border-box;
 }
 
 .auth-form__header {
@@ -79,19 +81,6 @@
   display: block;
 }
 
-.auth-form__submit {
-  width: 100%;
-  height: 45px;
-  background: #3456f3;
-  border-radius: 3px;
-  border: 0;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  color: #fff;
-  padding: 0;
-}
-
 .auth-form__info {
   margin-top: 16px;
   display: flex;
@@ -116,14 +105,14 @@
 
 @media screen and (max-width: 1280px) {
   .auth-form {
-    margin: calc(232px + (70 - 232) * var(--lg)) auto;
+    padding: calc(232px + (70 - 232) * var(--lg)) 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .auth-form {
-    margin-top: calc(56px + (232 - 56) * var(--md));
-    margin-bottom: calc(30px + (232 - 30) * var(--md));
+    padding-top: calc(56px + (232 - 56) * var(--md));
+    padding-bottom: calc(30px + (232 - 30) * var(--md));
     max-width: calc(260px + (396 - 260) * var(--md));
   }
 
@@ -135,11 +124,6 @@
 @media screen and (max-width: 500px) {
   .auth-form__header {
     justify-items: center;
-  }
-
-  .auth-form__submit {
-    font-size: 12px;
-    line-height: 15px;
   }
 
   .auth-form__info {
