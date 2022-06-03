@@ -1,12 +1,5 @@
 .menu-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 23px;
-  background: transparent;
-  border: 0;
-  padding: 0;
+  display: none;
 }
 
 .menu-button:focus {
@@ -14,13 +7,19 @@
 }
 
 .menu-button__line {
-  width: 100%;
+  width: 28px;
   height: 3px;
   background: #000;
 }
 
 @media screen and (max-width: 768px) {
   .menu-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+    border: 0;
+    padding: 0;
     width: calc(22px + (28 - 22) * var(--md));
     height: calc(20.5px + (23 - 20.5) * var(--md));
   }

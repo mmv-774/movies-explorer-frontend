@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
@@ -10,7 +11,7 @@ const Header = ({ loggedIn }) => {
       <Link to='/' className='animated-link'>
         <img src={logo} alt='Логотип' className='header__logo' />
       </Link>
-      {loggedIn ? <></> : <AuthNavigation />}
+      {loggedIn ? <Navigation /> : <AuthNavigation />}
     </header>
   );
 };

@@ -1,10 +1,28 @@
+import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import useCurrentWidth from '../../utils/hooks/useCurrentWidth';
+import Backdrop from '../Backdrop/Backdrop';
+import CloseButton from '../CloseButton/CloseButton';
+import Drawer from '../Drawer/Drawer';
+import MenuButton from '../MenuButton/MenuButton';
 import LinkWithIcon from '../LinkWithIcon/LinkWithIcon';
 import accountIcon from '../../images/account-icon.svg';
 import './Navigation.css';
 
 const Navigation = () => {
-  return (
+  let width = useCurrentWidth();
+
+  const [drawerIsOpen, setDrawerIsOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setDrawerIsOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setDrawerIsOpen(false);
+  };
+
+  const navigation = (
     <nav className='navigation'>
       <ul className='navigation__list'>
         <li className='navigation__list-item'>
@@ -31,6 +49,19 @@ const Navigation = () => {
       </ul>
       <LinkWithIcon link={'/profile'} text={'Аккаунт'} icon={accountIcon} />
     </nav>
+  );
+
+  return width <= 768 ? (
+    <>
+      <MenuButton onClick={handleDrawerOpen} />
+      <Drawer isOpen={drawerIsOpen}>
+        <CloseButton onClick={handleDrawerClose} />
+        {navigation}
+      </Drawer>
+      <Backdrop isShow={drawerIsOpen} onClick={handleDrawerClose} />
+    </>
+  ) : (
+    <>{navigation}</>
   );
 };
 

@@ -1,0 +1,33 @@
+.close-btn {
+  position: absolute;
+  width: 22px;
+  height: 3px;
+  padding: 0;
+  border: 0;
+  transform: translate(-50%, -50%);
+  background: transparent;
+}
+
+.close-btn::before,
+.close-btn::after {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  background: #000;
+}
+
+.close-btn::before {
+  transform: rotate(-45deg);
+}
+
+.close-btn::after {
+  transform: rotate(45deg);
+}
+
+@media screen and (max-width: 768px) {
+  .close-btn {
+    top: calc(20px + (30 - 20) * var(--md));
+    right: calc(20px + (30 - 20) * var(--md));
+  }
+}
