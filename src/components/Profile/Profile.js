@@ -23,6 +23,8 @@ const Profile = () => {
               autoComplete='false'
               placeholder='Введите имя'
               defaultValue='Виталий'
+              minLength={2}
+              maxLength={15}
               required
               readOnly={!isEditMode}
               className='profile__form__input'

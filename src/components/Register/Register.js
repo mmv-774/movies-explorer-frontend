@@ -17,6 +17,8 @@ const Register = () => {
           autoComplete='true'
           placeholder='Введите имя'
           defaultValue='Виталий'
+          minLength={2}
+          maxLength={15}
           required
           className='auth-form__input'
         />
@@ -43,6 +45,7 @@ const Register = () => {
           autoComplete='true'
           placeholder='Введите пароль'
           defaultValue='password'
+          minLength={2}
           required
           className='auth-form__input auth-form__input_invalid'
         />
