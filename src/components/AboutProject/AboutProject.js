@@ -3,7 +3,7 @@ import './AboutProject.css';
 
 const AboutProject = () => {
   return (
-    <section className='about-project'>
+    <section id='about-project' className='about-project'>
       <div className='about-project__wrapper'>
         <SectionHeader title={'О проекте'} />
         <ul className='about-project__description-list'>
@@ -20,16 +20,12 @@ const AboutProject = () => {
             </p>
           </li>
         </ul>
-        <ul className='about-project__timeline-list'>
-          <li className='about-project__timeline-list-item'>
-            <p className='about-project__timeline-title about-project__timeline-title_type_front'>1 неделя</p>
-            <p className='about-project__timeline-subtitle'>Back-end</p>
-          </li>
-          <li className='about-project__timeline-list-item'>
-            <p className='about-project__timeline-title about-project__timeline-title_type_back'>4 недели</p>
-            <p className='about-project__timeline-subtitle'>Front-end</p>
-          </li>
-        </ul>
+        <div className='about-project__timeline'>
+          <span className='about-project__timeline-title about-project__timeline-title_color_blue'>1 неделя</span>
+          <span className='about-project__timeline-title about-project__timeline-title_color_grey'>4 недели</span>
+          <span className='about-project__timeline-subtitle'>Back-end</span>
+          <span className='about-project__timeline-subtitle'>Front-end</span>
+        </div>
       </div>
     </section>
   );

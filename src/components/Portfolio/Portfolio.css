@@ -4,13 +4,12 @@
 
 .portfolio__wrapper {
   max-width: 1140px;
-  margin: 0 auto;
   padding: 0 0 115px;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .portfolio__title {
-  max-width: 250px;
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
@@ -19,24 +18,23 @@
 }
 
 .portfolio__list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  row-gap: 20px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .portfolio__list-item {
+  display: block;
   padding-bottom: 9px;
-  margin-bottom: 20px;
   box-sizing: border-box;
   border-bottom: 1px solid #e8e8e8;
 }
 
 .portfolio__list-item:last-of-type {
-  border: none;
   padding: 0;
-  margin: 0;
+  border: 0;
 }
 
 .portfolio__link {
