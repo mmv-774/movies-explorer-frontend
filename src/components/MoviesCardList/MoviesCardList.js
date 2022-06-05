@@ -21,7 +21,7 @@ const MoviesCardList = ({ showButtonMore }) => {
         </ul>
         <div className='movies-cards__button-container'>
           {showButtonMore && (
-            <button type='button' className='movies-cards__button-more animated-button'>
+            <button type='button' className='movies-cards__button-more'>
               Ещё
             </button>
           )}

@@ -8,7 +8,7 @@ const AuthForm = ({ title, submit, text, linkTo, linkText, children }) => {
     <div className='auth-form'>
       <div className='auth-form__wrapper'>
         <div className='auth-form__header'>
-          <Link to={'/'} className='animated-link'>
+          <Link to={'/'} className='auth-form__link'>
             <img src={logo} alt='Логотип' className='auth-form__logo' />
           </Link>
           <h2 className='auth-form__tittle'>{title}</h2>
@@ -19,7 +19,7 @@ const AuthForm = ({ title, submit, text, linkTo, linkText, children }) => {
         </form>
         <div className='auth-form__info'>
           <span className='auth-form__text'>{text}</span>
-          <Link to={linkTo} className='auth-form__link animated-link'>
+          <Link to={linkTo} className='auth-form__link'>
             {linkText}
           </Link>
         </div>

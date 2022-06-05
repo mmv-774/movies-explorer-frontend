@@ -3,7 +3,7 @@ import './LinkWithIcon.css';
 
 const LinkWithIcon = ({ link, text, icon }) => {
   return (
-    <Link to={link} className='link-with-icon animated-link'>
+    <Link to={link} className='link-with-icon'>
       <span>{text}</span>
       <span className='link-with-icon__icon' style={{ backgroundImage: `url(${icon})` }}></span>
     </Link>

@@ -21,7 +21,7 @@ const AboutMe = () => {
                   href='https://facebook.com/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='about-me__link animated-link'
+                  className='about-me__link'
                 >
                   Facebook
                 </a>
@@ -31,7 +31,7 @@ const AboutMe = () => {
                   href='https://github.com/mmv-774'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='about-me__link animated-link'
+                  className='about-me__link'
                 >
                   Github
                 </a>

@@ -26,14 +26,14 @@ const Navigation = () => {
     <nav className='navigation'>
       <ul className='navigation__list'>
         <li className='navigation__list-item'>
-          <Link to='/' className='navigation__link navigation__link_home animated-link'>
+          <Link to='/' className='navigation__link navigation__link_home'>
             Главная
           </Link>
         </li>
         <li className='navigation__list-item'>
           <NavLink
             to='/movies'
-            className={(isActive) => `navigation__link ${isActive && 'navigation__link_active'} animated-link`}
+            className={(isActive) => `navigation__link ${isActive && 'navigation__link_active'}`}
           >
             Фильмы
           </NavLink>
@@ -41,7 +41,7 @@ const Navigation = () => {
         <li className='navigation__list-item'>
           <NavLink
             to='/saved-movies'
-            className={(isActive) => `navigation__link ${isActive && 'navigation__link_active'} animated-link`}
+            className={(isActive) => `navigation__link ${isActive && 'navigation__link_active'}`}
           >
             Сохранённые фильмы
           </NavLink>

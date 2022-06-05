@@ -1,6 +1,12 @@
 .menu-button {
   display: none;
   --md: calc((100vw - 320px) / (768 - 320));
+  transition: opacity 0.3s linear;
+}
+
+.menu-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .menu-button:focus {

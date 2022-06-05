@@ -8,7 +8,7 @@ import './Header.css';
 const Header = ({ loggedIn }) => {
   return (
     <header className='header'>
-      <Link to='/' className='animated-link'>
+      <Link to='/' className='header__link'>
         <img src={logo} alt='Логотип' className='header__logo' />
       </Link>
       {loggedIn ? <Navigation /> : <AuthNavigation />}

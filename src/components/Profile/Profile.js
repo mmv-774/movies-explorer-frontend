@@ -54,12 +54,12 @@ const Profile = () => {
             <>
               <button
                 type='button'
-                className='profile__form-handler profile__form-handler_type_edit animated-button'
+                className='profile__form-handler profile__form-handler_type_edit'
                 onClick={handleButtonEditClick}
               >
                 Редактировать
               </button>
-              <button type='button' className='profile__form-handler profile__form-handler_type_logout animated-button'>
+              <button type='button' className='profile__form-handler profile__form-handler_type_logout'>
                 Выйти из аккаунта
               </button>
             </>

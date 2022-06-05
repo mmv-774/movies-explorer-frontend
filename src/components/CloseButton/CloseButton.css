@@ -7,6 +7,12 @@
   border: 0;
   transform: translate(-50%, -50%);
   background: transparent;
+  transition: opacity 0.3s linear;
+}
+
+.close-btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .close-btn::before,

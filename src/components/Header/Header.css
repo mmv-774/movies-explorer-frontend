@@ -9,6 +9,15 @@
   background: inherit;
 }
 
+.header__link {
+  transition: opacity 0.3s linear;
+}
+
+.header__link:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .header__logo {
   display: block;
   width: 38px;

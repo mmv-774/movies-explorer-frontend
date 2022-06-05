@@ -9,11 +9,22 @@
   line-height: 17px;
   color: #fff;
   padding: 0;
+  transition: opacity 0.3s linear;
 }
 
 .submit-button:disabled {
   color: #c2c2c2;
   background: #f8f8f8;
+}
+
+.submit-button:disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+.submit-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 500px) {

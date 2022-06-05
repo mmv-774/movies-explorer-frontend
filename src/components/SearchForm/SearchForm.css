@@ -54,6 +54,12 @@
   background-position: center;
   background-repeat: no-repeat;
   background-image: url('../../images/search-form-submit.svg');
+  transition: opacity 0.3s linear;
+}
+
+.search-form__submit:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 1280px) {

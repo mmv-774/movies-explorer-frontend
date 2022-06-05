@@ -6,12 +6,12 @@ const AuthNavigation = () => {
     <nav className='auth-navigation'>
       <ul className='auth-navigation__list'>
         <li className='auth-navigation__list-item'>
-          <Link to='/signup' className='auth-navigation__link auth-navigation__link_type_signup animated-link'>
+          <Link to='/signup' className='auth-navigation__link auth-navigation__link_type_signup'>
             Регистрация
           </Link>
         </li>
         <li>
-          <Link to='/signin' className='auth-navigation__link auth-navigation__link_type_signin animated-link'>
+          <Link to='/signin' className='auth-navigation__link auth-navigation__link_type_signin'>
             Войти
           </Link>
         </li>
