@@ -1,4 +1,5 @@
 .close-btn {
+  --md: calc((100vw - 320px) / (768 - 320));
   position: absolute;
   width: 22px;
   height: 3px;

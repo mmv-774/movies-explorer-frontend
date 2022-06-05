@@ -5,11 +5,13 @@ import './SearchForm.css';
 const SearchForm = () => {
   return (
     <div className='search-form'>
-      <form name='search-form' noValidate className='search-form__form'>
-        <input type='text' placeholder='Фильм' required className='search-form__input' />
-        <button type='submit' className='search-form__submit animated-button' />
-      </form>
-      <FilterCheckbox />
+      <div className='search-form__wrapper'>
+        <form name='search-form' className='search-form__form'>
+          <input type='text' size={'1'} placeholder='Фильм' required className='search-form__input' />
+          <button type='submit' className='search-form__submit animated-button' />
+        </form>
+        <FilterCheckbox />
+      </div>
     </div>
   );
 };

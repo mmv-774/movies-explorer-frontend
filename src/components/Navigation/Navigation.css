@@ -1,6 +1,7 @@
 .navigation {
   display: flex;
   align-items: center;
+  --md: calc((100vw - 320px) / (768 - 320));
 }
 
 .navigation__list {

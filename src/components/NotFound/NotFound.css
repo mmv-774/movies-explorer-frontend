@@ -1,4 +1,5 @@
 .not-found {
+  --md: calc((100vw - 320px) / (768 - 320));
   min-height: 100vh;
   box-sizing: border-box;
   background: #fafafa;

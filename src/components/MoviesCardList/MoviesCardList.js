@@ -1,23 +1,31 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 
-const MoviesCardList = () => {
+const MoviesCardList = ({ showButtonMore }) => {
   return (
     <section className='movies-cards'>
-      <ul className='movies-cards__cards'>
-        <MoviesCard mode={'like'} />
-        <MoviesCard mode={'like'} />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard mode={'like'} />
-        <MoviesCard mode={'like'} />
-        <MoviesCard />
-        <MoviesCard />
-      </ul>
-      <div className='movies-cards__button-container'>
-        <button type='button' className='movies-cards__button-more animated-button'>
-          Ещё
-        </button>
+      <div className='movies-cards__wrapper'>
+        <ul className='movies-cards__cards'>
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+          <MoviesCard />
+        </ul>
+        <div className='movies-cards__button-container'>
+          {showButtonMore && (
+            <button type='button' className='movies-cards__button-more animated-button'>
+              Ещё
+            </button>
+          )}
+        </div>
       </div>
     </section>
   );

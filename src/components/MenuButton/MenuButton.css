@@ -1,5 +1,6 @@
 .menu-button {
   display: none;
+  --md: calc((100vw - 320px) / (768 - 320));
 }
 
 .menu-button:focus {

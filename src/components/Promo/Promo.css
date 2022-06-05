@@ -1,5 +1,6 @@
 .promo {
   background: #dddee3;
+  --md: calc((100vw - 320px) / (768 - 320));
 }
 
 .promo__wrapper {

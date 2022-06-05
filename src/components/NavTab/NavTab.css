@@ -1,5 +1,6 @@
 .nav-tab {
   background: #f5f5f5;
+  --md: calc((100vw - 320px) / (768 - 320));
 }
 
 .nav-tab__nav {

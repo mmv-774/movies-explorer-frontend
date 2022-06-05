@@ -1,5 +1,7 @@
 .about-project {
   background-color: #fafafa;
+  --md: calc((100vw - 320px) / (768 - 320));
+  --lg: calc((100vw - 768px) / (1280 - 768));
 }
 
 .about-project__wrapper {

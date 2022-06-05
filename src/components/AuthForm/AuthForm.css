@@ -1,4 +1,5 @@
 .auth-form {
+  --md: calc((100vw - 320px) / (768 - 320));
   min-height: 100vh;
   padding: calc(100vh * (70 / 700)) 0;
   box-sizing: border-box;

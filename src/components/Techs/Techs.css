@@ -1,5 +1,7 @@
 .techs {
   background: #f5f5f5;
+  --md: calc((100vw - 320px) / (768 - 320));
+  --lg: calc((100vw - 768px) / (1280 - 768));
 }
 
 .techs__wrapper {
