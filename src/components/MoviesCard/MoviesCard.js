@@ -1,9 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import photo from '../../images/movies-card-img.png';
 import './MoviesCard.css';
 
-const MoviesCard = () => {
+const MoviesCard = ({ name, duration, image }) => {
   const [isSaved, setIsSaved] = React.useState(false);
 
   const { location } = useLocation();
@@ -35,14 +34,14 @@ const MoviesCard = () => {
   };
 
   return (
-    <li className='movies-card'>
+    <div className='movies-card'>
       <div className='movies-card__header'>
-        <span className='movies-card__title'>В погоне за Бенкси</span>
-        <span className='movies-card__time'>27 минут</span>
+        <span className='movies-card__title'>{name}</span>
+        <span className='movies-card__time'>{`${duration} минут`}</span>
       </div>
-      <img src={photo} alt='Постер фильма' className='movies-card__img' />
+      <img src={image} alt='Постер фильма' className='movies-card__img' />
       <div className='movies-card__footer'>{renderButton()}</div>
-    </li>
+    </div>
   );
 };
 

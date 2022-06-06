@@ -34,6 +34,7 @@ const Navigation = () => {
           <NavLink
             to='/movies'
             className={(isActive) => `navigation__link ${isActive && 'navigation__link_active'}`}
+            onClick={handleDrawerClose}
           >
             Фильмы
           </NavLink>
@@ -42,6 +43,7 @@ const Navigation = () => {
           <NavLink
             to='/saved-movies'
             className={(isActive) => `navigation__link ${isActive && 'navigation__link_active'}`}
+            onClick={handleDrawerClose}
           >
             Сохранённые фильмы
           </NavLink>

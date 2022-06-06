@@ -13,7 +13,7 @@
   padding: 0;
   display: grid;
   justify-content: center;
-  grid-template: auto / repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, 360px);
   row-gap: 32px;
   column-gap: 30px;
   margin: 70px 0 10px;
@@ -62,8 +62,15 @@
   }
 
   .movies-cards__cards {
+    grid-template-columns: repeat(auto-fit, 342px);
     row-gap: calc(16px + (32 - 16) * var(--md));
     margin-top: calc(40px + (70 - 40) * var(--md));
     margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .movies-cards__cards {
+    grid-template-columns: repeat(auto-fit, 300px);
   }
 }

@@ -12,6 +12,7 @@
 
 .auth-form__header {
   display: grid;
+  justify-items: start;
   row-gap: 40px;
 }
 
