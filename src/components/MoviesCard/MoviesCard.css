@@ -13,7 +13,7 @@
 }
 
 .movies-card__title {
-  max-width: 240px;
+  max-width: 230px;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
@@ -23,7 +23,7 @@
 }
 
 .movies-card__time {
-  max-width: 70px;
+  max-width: 80px;
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
@@ -84,7 +84,7 @@
 
 @media screen and (max-width: 768px) {
   .movies-card__title {
-    max-width: 224px;
+    max-width: 214px;
   }
 
   .movies-card__img {
@@ -101,13 +101,13 @@
   .movies-card__title {
     font-weight: 700;
     font-size: 12px;
-    max-width: 200px;
+    max-width: 190px;
   }
 
   .movies-card__time {
     font-weight: 700;
     font-size: 10px;
-    max-width: 50px;
+    max-width: 60px;
   }
 
   .movies-card__img {
