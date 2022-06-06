@@ -49,7 +49,7 @@ const Navigation = () => {
           </NavLink>
         </li>
       </ul>
-      <LinkWithIcon link={'/profile'} text={'Аккаунт'} icon={accountIcon} />
+      <LinkWithIcon link={'/profile'} text={'Аккаунт'} icon={accountIcon} onClick={handleDrawerClose} />
     </nav>
   );
 

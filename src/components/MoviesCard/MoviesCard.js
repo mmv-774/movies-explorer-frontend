@@ -5,14 +5,14 @@ import './MoviesCard.css';
 const MoviesCard = ({ name, duration, image }) => {
   const [isSaved, setIsSaved] = React.useState(false);
 
-  const { location } = useLocation();
+  const { pathname } = useLocation();
 
   const handleCardButtonClick = () => {
     setIsSaved(!isSaved);
   };
 
   const renderButton = () => {
-    if (location === '/saved-movies')
+    if (pathname === '/saved-movies')
       return <button type='button' className={'movies-card__button movies-card__button_type_delete'}></button>;
     if (isSaved)
       return (
