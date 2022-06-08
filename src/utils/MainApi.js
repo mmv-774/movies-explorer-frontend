@@ -1,7 +1,7 @@
-export const BASE_URL = 'https://api.mm.nomoredomains.xyz';
+const BASE_URL = 'https://api.mm.nomoredomains.xyz';
 
 function _sendRequest(path, options) {
-  return fetch(`${this._baseUrl}${path}`, options).then((response) => _handleResponse(response));
+  return fetch(`${BASE_URL}${path}`, options).then((response) => _handleResponse(response));
 }
 
 function _handleResponse(response) {

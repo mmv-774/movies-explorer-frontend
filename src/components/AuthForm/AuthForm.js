@@ -3,7 +3,7 @@ import logo from '../../images/logo.svg';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import './AuthForm.css';
 
-const AuthForm = ({ title, submit, text, linkTo, linkText, children }) => {
+const AuthForm = ({ title, submit, text, linkTo, linkText, children, onSubmit }) => {
   return (
     <div className='auth-form'>
       <div className='auth-form__wrapper'>
@@ -13,7 +13,7 @@ const AuthForm = ({ title, submit, text, linkTo, linkText, children }) => {
           </Link>
           <h2 className='auth-form__tittle'>{title}</h2>
         </div>
-        <form name='auth-form' className='auth-form__form'>
+        <form name='auth-form' className='auth-form__form' onSubmit={onSubmit}>
           <div className='auth-form__inputs-container'>{children}</div>
           <SubmitButton caption={submit} disabled={false} />
         </form>

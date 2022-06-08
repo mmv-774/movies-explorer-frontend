@@ -1,7 +1,6 @@
 import success from '../../images/message-success-icon.svg';
 import fail from '../../images/message-fail-icon.svg';
 import './InfoTooltip.css';
-import CloseButton from '../CloseButton/CloseButton';
 
 function InfoTooltip({ isOpen, isSuccess, message, onClose }) {
   return (
