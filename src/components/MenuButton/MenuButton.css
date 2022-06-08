@@ -1,0 +1,37 @@
+.menu-button {
+  display: none;
+  --md: calc((100vw - 320px) / (768 - 320));
+  transition: opacity 0.3s linear;
+}
+
+.menu-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.menu-button:focus {
+  outline: 0;
+}
+
+.menu-button__line {
+  width: 28px;
+  height: 3px;
+  background: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    width: calc(22px + (28 - 22) * var(--md));
+    height: calc(20.5px + (23 - 20.5) * var(--md));
+  }
+
+  .menu-button__line {
+    height: calc(2.5px + (3 - 2.5) * var(--md));
+  }
+}
