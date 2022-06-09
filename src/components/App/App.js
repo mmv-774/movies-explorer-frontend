@@ -13,9 +13,12 @@ import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import './App.css';
+import Preloader from '../Preloader/Preloader';
+import Backdrop from '../Backdrop/Backdrop';
 
 const App = () => {
   const [currentUser, setCurrentUser] = React.useState({});
+  const [isPreloaderShow, setIsPreloaderShow] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [infoTooltipProps, setInfoTooltipProps] = React.useState({});
 
@@ -25,7 +28,16 @@ const App = () => {
     setIsInfoTooltipPopupOpen(false);
   };
 
+  const showPreloader = () => {
+    setIsPreloaderShow(true);
+  };
+
+  const hidePreloader = () => {
+    setIsPreloaderShow(false);
+  };
+
   const handleRegister = (name, email, password) => {
+    showPreloader();
     return register(name, email, password)
       .then(() => {
         setInfoTooltipProps({ isSuccess: true, message: 'Вы успешно зарегистрировались!' });
@@ -34,7 +46,10 @@ const App = () => {
       .catch((error) => {
         setInfoTooltipProps({ isSuccess: false, message: error });
       })
-      .finally(() => setIsInfoTooltipPopupOpen(true));
+      .finally(() => {
+        hidePreloader();
+        setIsInfoTooltipPopupOpen(true)
+      });
   };
 
   return (
@@ -76,6 +91,8 @@ const App = () => {
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeInfoTooltip}
         />
+        <Preloader isShow={isPreloaderShow}/>
+        <Backdrop isShow={isPreloaderShow}/>
       </CurrentUserContext.Provider>
     </div>
   );

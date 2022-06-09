@@ -1,7 +1,7 @@
-const BASE_URL = 'https://api.mm.nomoredomains.xyz';
+import { MAIN_API_BASE_URL } from './constants';
 
 function _sendRequest(path, options) {
-  return fetch(`${BASE_URL}${path}`, options).then((response) => _handleResponse(response));
+  return fetch(`${MAIN_API_BASE_URL}${path}`, options).then((response) => _handleResponse(response));
 }
 
 function _handleResponse(response) {
