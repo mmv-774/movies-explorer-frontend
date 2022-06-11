@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { register } from '../../utils/MainApi';
+import { register, login, getUserInfo, tokenCheck } from '../../utils/MainApi';
+import { handleResponse } from '../../utils/utils';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
@@ -12,17 +13,35 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import NotFound from '../NotFound/NotFound';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import './App.css';
 import Preloader from '../Preloader/Preloader';
 import Backdrop from '../Backdrop/Backdrop';
+import './App.css';
 
 const App = () => {
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isPreloaderShow, setIsPreloaderShow] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [infoTooltipProps, setInfoTooltipProps] = React.useState({});
 
   const history = useHistory();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      handleResponse(getUserInfo(), (res) => setCurrentUser(res));
+    } else {
+      setCurrentUser({});
+    }
+  }, [loggedIn]);
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      handleResponse(tokenCheck(), () => {
+        setLoggedIn(true);
+      });
+    }
+  }, [history]);
 
   const closeInfoTooltip = () => {
     setIsInfoTooltipPopupOpen(false);
@@ -48,8 +67,31 @@ const App = () => {
       })
       .finally(() => {
         hidePreloader();
-        setIsInfoTooltipPopupOpen(true)
+        setIsInfoTooltipPopupOpen(true);
       });
+  };
+
+  const handleLogin = (email, password) => {
+    showPreloader();
+    return login(email, password)
+      .then((res) => {
+        localStorage.setItem('jwt', res.token);
+        setLoggedIn(true);
+        history.push('/movies');
+      })
+      .catch((error) => {
+        setInfoTooltipProps({ isSuccess: false, message: error });
+        setIsInfoTooltipPopupOpen(true);
+      })
+      .finally(() => {
+        hidePreloader();
+      });
+  };
+
+  const signOut = () => {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    history.push('/sign-in');
   };
 
   return (
@@ -57,26 +99,26 @@ const App = () => {
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
           <Route exact path='/'>
-            <Header loggedIn={false} backgroundColor={'gray'} />
+            <Header loggedIn={loggedIn} backgroundColor={'gray'} />
             <Main />
             <Footer />
           </Route>
           <Route path='/movies'>
-            <Header loggedIn={true} backgroundColor={'light'} />
+            <Header loggedIn={loggedIn} backgroundColor={'light'} />
             <Movies />
             <Footer />
           </Route>
           <Route path='/saved-movies'>
-            <Header loggedIn={true} backgroundColor={'light'} />
+            <Header loggedIn={loggedIn} backgroundColor={'light'} />
             <SavedMovies />
             <Footer />
           </Route>
           <Route path='/profile'>
-            <Header loggedIn={true} />
+            <Header loggedIn={loggedIn} />
             <Profile />
           </Route>
           <Route path='/signin'>
-            <Login />
+            <Login onLogin={handleLogin} />
           </Route>
           <Route path='/signup'>
             <Register onRegister={handleRegister} />
@@ -91,8 +133,8 @@ const App = () => {
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeInfoTooltip}
         />
-        <Preloader isShow={isPreloaderShow}/>
-        <Backdrop isShow={isPreloaderShow}/>
+        <Preloader isShow={isPreloaderShow} />
+        <Backdrop isShow={isPreloaderShow} />
       </CurrentUserContext.Provider>
     </div>
   );
