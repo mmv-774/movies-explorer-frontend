@@ -15,6 +15,7 @@ import NotFound from '../NotFound/NotFound';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import Preloader from '../Preloader/Preloader';
 import Backdrop from '../Backdrop/Backdrop';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import './App.css';
 
 const App = () => {
@@ -117,20 +118,20 @@ const App = () => {
             <Main />
             <Footer />
           </Route>
-          <Route path='/movies'>
+          <ProtectedRoute exact path={'/movies'} redirectPath='/' redirectCondition={!loggedIn}>
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
             <Movies />
             <Footer />
-          </Route>
-          <Route path='/saved-movies'>
+          </ProtectedRoute>
+          <ProtectedRoute exact path={'/saved-movies'} redirectPath='/' redirectCondition={!loggedIn}>
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
             <SavedMovies />
             <Footer />
-          </Route>
-          <Route path='/profile'>
-            <Header loggedIn={loggedIn} />
+          </ProtectedRoute>
+          <ProtectedRoute exact path={'/profile'} redirectPath='/' redirectCondition={!loggedIn}>
+            <Header loggedIn={loggedIn} backgroundColor={'light'} />
             <Profile onEditProfile={handleEditProfile} onSignOut={handleSignOut} />
-          </Route>
+          </ProtectedRoute>
           <Route path='/signin'>
             <Login onLogin={handleLogin} />
           </Route>
