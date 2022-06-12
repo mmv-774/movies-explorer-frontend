@@ -49,3 +49,14 @@ export const getUserInfo = () => {
     headers: _setHeaders(),
   });
 };
+
+export const patchUserInfo = (name, email) => {
+  return _sendRequest('/users/me', {
+    method: 'PATCH',
+    headers: _setHeaders(),
+    body: JSON.stringify({
+      name: name,
+      email: email,
+    }),
+  });
+};

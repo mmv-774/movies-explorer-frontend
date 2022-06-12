@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { register, login, getUserInfo, tokenCheck } from '../../utils/MainApi';
+import { register, login, getUserInfo, tokenCheck, patchUserInfo } from '../../utils/MainApi';
 import { handleResponse } from '../../utils/utils';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -88,10 +88,24 @@ const App = () => {
       });
   };
 
-  const signOut = () => {
+  const handleEditProfile = (name, email) => {
+    showPreloader();
+    patchUserInfo(name, email)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        hidePreloader();
+      });
+  };
+
+  const handleSignOut = () => {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
-    history.push('/sign-in');
+    history.push('/signin');
   };
 
   return (
@@ -115,7 +129,7 @@ const App = () => {
           </Route>
           <Route path='/profile'>
             <Header loggedIn={loggedIn} />
-            <Profile />
+            <Profile onEditProfile={handleEditProfile} onSignOut={handleSignOut} />
           </Route>
           <Route path='/signin'>
             <Login onLogin={handleLogin} />

@@ -2,12 +2,15 @@ import React from 'react';
 import AuthForm from '../AuthForm/AuthForm';
 
 const Register = ({ onRegister }) => {
+  const nameRegex = /^[a-zA-Zа-яА-я -]+$/;
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   const [inputsValues, setInputsValues] = React.useState([]);
   const [inputsErrors, setInputsErrors] = React.useState([]);
 
   const handleInputChange = (e) => {
     if (e.target.id === 'name') {
-      const nameRegex = /^[a-zA-Zа-яА-я -]+$/;
       e.target.setCustomValidity(
         nameRegex.test(e.target.value) || e.target.value === ''
           ? ''
@@ -16,8 +19,6 @@ const Register = ({ onRegister }) => {
     }
 
     if (e.target.id === 'email') {
-      const emailRegex =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       e.target.setCustomValidity(
         emailRegex.test(e.target.value) || e.target.value === '' ? '' : 'Некорректный адрес эл.почты'
       );
