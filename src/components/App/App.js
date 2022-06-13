@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { register, login, getUserInfo, tokenCheck, patchUserInfo } from '../../utils/MainApi';
+import { getMovies } from '../../utils/MoviesApi';
 import { handleResponse } from '../../utils/utils';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -24,6 +25,7 @@ const App = () => {
   const [isPreloaderShow, setIsPreloaderShow] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [infoTooltipProps, setInfoTooltipProps] = React.useState({});
+  const [movies, setMovies] = React.useState([]);
 
   const history = useHistory();
 
@@ -109,6 +111,34 @@ const App = () => {
     history.push('/signin');
   };
 
+  const handleSearchMovies = () => {
+    showPreloader();
+    getMovies()
+      .then((res) => {
+        const filtered = filterMovies(res, localStorage.getItem('keyword'));
+        setMovies(filtered);
+        localStorage.setItem('movies', JSON.stringify(filtered));
+      })
+      .catch(() => {
+        localStorage.removeItem('movies');
+        setMovies([]);
+        setInfoTooltipProps({
+          isSuccess: false,
+          message:
+            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+        });
+        setIsInfoTooltipPopupOpen(true);
+      })
+      .finally(() => {
+        hidePreloader();
+      });
+  };
+
+  const filterMovies = (movies, keyword) =>
+    movies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
+
+  const filterByShort = (movies) => movies.filter((movie) => movie.duration <= 40);
+
   return (
     <div className='app'>
       <CurrentUserContext.Provider value={currentUser}>
@@ -120,7 +150,7 @@ const App = () => {
           </Route>
           <ProtectedRoute exact path={'/movies'} redirectPath='/' redirectCondition={!loggedIn}>
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
-            <Movies />
+            <Movies movies={movies} filterByShort={filterByShort} onSearchMovies={handleSearchMovies} />
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path={'/saved-movies'} redirectPath='/' redirectCondition={!loggedIn}>

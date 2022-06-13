@@ -19,6 +19,11 @@
   margin: 70px 0 10px;
 }
 
+.movies-cards__not-found {
+  margin: 0;
+  text-align: center;
+}
+
 .movies-cards__button-container {
   display: flex;
   justify-content: center;
