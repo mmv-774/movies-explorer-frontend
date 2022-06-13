@@ -10,4 +10,6 @@
   color: #000;
   background-color: #fafafa;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
