@@ -61,13 +61,18 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 815px) {
+  .movies-cards__cards {
+    grid-template-columns: repeat(auto-fit, 342px);
+  }
+}
+
+@media screen and (max-width: 769px) {
   .movies-cards__wrapper {
     max-width: calc(300px + (708 - 300) * var(--md));
   }
 
   .movies-cards__cards {
-    grid-template-columns: repeat(auto-fit, 342px);
     row-gap: calc(16px + (32 - 16) * var(--md));
     margin-top: calc(40px + (70 - 40) * var(--md));
     margin-bottom: 30px;

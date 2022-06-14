@@ -14,8 +14,15 @@ const MoviesCardList = ({ isUserList, movies, savedMovies, onSaveMovie, onDelete
 
   React.useEffect(() => {
     calcMoviesGridSize();
-    setShowedMovies(movies.slice(0, totalMovies));
   }, [width]);
+
+  React.useEffect(() => {
+    setShowedMovies(movies.slice(0, totalMovies));
+  }, [totalMovies, totalAddedMovies]);
+
+  React.useEffect(() => {
+    setIsShowMoreButton(movies.length >= showedMovies.length + totalAddedMovies);
+  }, [showedMovies]);
 
   React.useEffect(() => {
     setShowedMovies(movies.slice(0, totalMovies));
