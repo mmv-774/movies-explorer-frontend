@@ -62,11 +62,13 @@ const MoviesCard = ({ movie, isUserCard, isSavedCard, onSaveMovie, onDeleteMovie
           'минут',
         ])}`}</span>
       </div>
-      <img
-        src={!isUserCard ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
-        alt='Постер фильма'
-        className='movies-card__img'
-      />
+      <a href={movie.trailerLink} target='_blank' rel='noopener noreferrer' className='movies-card__img-link'>
+        <img
+          src={!isUserCard ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
+          alt='Постер фильма'
+          className='movies-card__img'
+        />
+      </a>
       <div className='movies-card__footer'>{renderButton()}</div>
     </div>
   );
