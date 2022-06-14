@@ -1,10 +1,11 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import useCurrentWidth from '../../utils/hooks/useCurrentWidth';
+import { findInMovies } from '../../utils/utils';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ movies }) => {
-  const [showMovies, setShowMovies] = React.useState([]);
+const MoviesCardList = ({ isUserList, movies, savedMovies, onSaveMovie, onDeleteMovie }) => {
+  const [showedMovies, setShowedMovies] = React.useState([]);
   const [totalMovies, setTotalMovies] = React.useState(12);
   const [totalAddedMovies, setTotalAddedMovies] = React.useState(3);
   const [isShowMoreButton, setIsShowMoreButton] = React.useState(false);
@@ -13,11 +14,11 @@ const MoviesCardList = ({ movies }) => {
 
   React.useEffect(() => {
     calcMoviesGridSize();
-    setShowMovies(movies.slice(0, totalMovies));
+    setShowedMovies(movies.slice(0, totalMovies));
   }, [width]);
 
   React.useEffect(() => {
-    setShowMovies(movies.slice(0, totalMovies));
+    setShowedMovies(movies.slice(0, totalMovies));
     setIsShowMoreButton(movies.length > totalMovies);
   }, [movies]);
 
@@ -41,21 +42,23 @@ const MoviesCardList = ({ movies }) => {
   };
 
   const handleMoreButtonClick = () => {
-    setShowMovies(movies.slice(0, showMovies.length + totalAddedMovies));
-    setIsShowMoreButton(movies.length >= showMovies.length + totalAddedMovies);
+    setShowedMovies(movies.slice(0, showedMovies.length + totalAddedMovies));
+    setIsShowMoreButton(movies.length >= showedMovies.length + totalAddedMovies);
   };
 
   return (
     <section className='movies-cards'>
       <div className='movies-cards__wrapper'>
-        {showMovies.length > 0 ? (
+        {showedMovies.length ? (
           <ul className='movies-cards__cards'>
-            {showMovies.map((movie) => (
-              <li key={movie.id}>
+            {showedMovies.map((movie) => (
+              <li key={movie.id || movie._id}>
                 <MoviesCard
-                  name={movie.nameRU}
-                  duration={movie.duration}
-                  image={`https://api.nomoreparties.co${movie.image.url}`}
+                  isUserCard={isUserList}
+                  isSavedCard={findInMovies(savedMovies, movie.id || movie._id)}
+                  movie={movie}
+                  onSaveMovie={onSaveMovie}
+                  onDeleteMovie={onDeleteMovie}
                 />
               </li>
             ))}

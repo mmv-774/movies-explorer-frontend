@@ -3,25 +3,18 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import '../../images/search-form-submit.svg';
 import './SearchForm.css';
 
-const SearchForm = ({ onShortCheckedChange, onSearch }) => {
-  const [inputValue, setInputValue] = React.useState('');
-  const [isShortCheck, setIsShortCheck] = React.useState(false);
-
-  React.useEffect(() => {
-    localStorage.setItem('isShortCheck', isShortCheck);
-    onShortCheckedChange(isShortCheck);
-  }, [isShortCheck]);
-
-  React.useEffect(() => {
-    localStorage.setItem('keyword', inputValue);
-  }, [inputValue]);
+const SearchForm = ({ defaultInputValue, defaultCheckboxValue, onKeywordChange, onShortCheckedChange, onSearch }) => {
+  const [inputValue, setInputValue] = React.useState(defaultInputValue || '');
+  const [isShortCheck, setIsShortCheck] = React.useState(defaultCheckboxValue || false);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    onKeywordChange(e.target.value);
   };
 
   const handleCheckBoxChange = () => {
     setIsShortCheck(!isShortCheck);
+    onShortCheckedChange(!isShortCheck);
   };
 
   const handleSubmit = (e) => {
@@ -44,7 +37,7 @@ const SearchForm = ({ onShortCheckedChange, onSearch }) => {
           />
           <button type='submit' className='search-form__submit' />
         </form>
-        <FilterCheckbox onCheckBoxChange={handleCheckBoxChange} />
+        <FilterCheckbox isChecked={isShortCheck} onCheckBoxChange={handleCheckBoxChange} />
       </div>
     </div>
   );

@@ -2,13 +2,20 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
-const MoviesCard = ({ name, duration, image }) => {
-  const [isSaved, setIsSaved] = React.useState(false);
-
-  const { pathname } = useLocation();
+const MoviesCard = ({ movie, isUserCard, isSavedCard, onSaveMovie, onDeleteMovie }) => {
+  const [isSaved, setIsSaved] = React.useState(isSavedCard);
 
   const handleCardButtonClick = () => {
+    if (isSaved) {
+      onDeleteMovie(movie.id || movie._id);
+    } else {
+      onSaveMovie(movie);
+    }
     setIsSaved(!isSaved);
+  };
+
+  const handleDeleteButtonClick = () => {
+    onDeleteMovie(movie._id);
   };
 
   const declOfNum = (number, words) => {
@@ -18,8 +25,14 @@ const MoviesCard = ({ name, duration, image }) => {
   };
 
   const renderButton = () => {
-    if (pathname === '/saved-movies')
-      return <button type='button' className={'movies-card__button movies-card__button_type_delete'}></button>;
+    if (isUserCard)
+      return (
+        <button
+          type='button'
+          className={'movies-card__button movies-card__button_type_delete'}
+          onClick={handleDeleteButtonClick}
+        ></button>
+      );
     if (isSaved)
       return (
         <button
@@ -42,10 +55,18 @@ const MoviesCard = ({ name, duration, image }) => {
   return (
     <div className='movies-card'>
       <div className='movies-card__header'>
-        <span className='movies-card__title'>{name}</span>
-        <span className='movies-card__time'>{`${duration} ${declOfNum(duration, ['минута', 'минуты', 'минут'])}`}</span>
+        <span className='movies-card__title'>{movie.nameRU}</span>
+        <span className='movies-card__time'>{`${movie.duration} ${declOfNum(movie.duration, [
+          'минута',
+          'минуты',
+          'минут',
+        ])}`}</span>
       </div>
-      <img src={image} alt='Постер фильма' className='movies-card__img' />
+      <img
+        src={!isUserCard ? `https://api.nomoreparties.co${movie.image.url}` : movie.image}
+        alt='Постер фильма'
+        className='movies-card__img'
+      />
       <div className='movies-card__footer'>{renderButton()}</div>
     </div>
   );

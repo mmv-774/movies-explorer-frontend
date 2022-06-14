@@ -60,3 +60,37 @@ export const patchUserInfo = (name, email) => {
     }),
   });
 };
+
+export const getSavedMovies = () => {
+  return _sendRequest('/movies', {
+    headers: _setHeaders(),
+  });
+};
+
+export const postMovie = (movie) => {
+  return _sendRequest('/movies', {
+    method: 'POST',
+    headers: _setHeaders(),
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: 'https://api.nomoreparties.co' + movie.image.url,
+      thumbnail: 'https://api.nomoreparties.co' + movie.image.formats.thumbnail.url,
+      trailerLink: movie.trailerLink,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+      movieId: movie.id,
+    }),
+  });
+};
+
+export const deleteMovie = (movieId) => {
+    console.log(movieId);
+  return _sendRequest(`/movies/${movieId}`, {
+    method: 'DELETE',
+    headers: _setHeaders(),
+  });
+};

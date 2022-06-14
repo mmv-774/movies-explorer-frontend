@@ -1,9 +1,18 @@
 import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { register, login, getUserInfo, tokenCheck, patchUserInfo } from '../../utils/MainApi';
+import {
+  register,
+  login,
+  getUserInfo,
+  tokenCheck,
+  patchUserInfo,
+  getSavedMovies,
+  postMovie,
+  deleteMovie,
+} from '../../utils/MainApi';
 import { getMovies } from '../../utils/MoviesApi';
-import { handleResponse } from '../../utils/utils';
+import { handleResponse, findInMovies } from '../../utils/utils';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
@@ -26,6 +35,7 @@ const App = () => {
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
   const [infoTooltipProps, setInfoTooltipProps] = React.useState({});
   const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
 
   const history = useHistory();
 
@@ -38,6 +48,14 @@ const App = () => {
   }, [loggedIn]);
 
   React.useEffect(() => {
+    if (loggedIn) {
+      handleResponse(getSavedMovies(), (res) => setSavedMovies(res.movies));
+    } else {
+      setSavedMovies([]);
+    }
+  }, [loggedIn]);
+
+  React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
       handleResponse(tokenCheck(), () => {
@@ -45,6 +63,15 @@ const App = () => {
       });
     }
   }, [history]);
+
+  React.useEffect(() => {
+    localStorage.removeItem('isShortCheck');
+    localStorage.removeItem('keyword');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('isShortCheckSaved');
+    localStorage.removeItem('keywordSaved');
+    localStorage.removeItem('moviesSaved');
+  }, []);
 
   const closeInfoTooltip = () => {
     setIsInfoTooltipPopupOpen(false);
@@ -111,13 +138,45 @@ const App = () => {
     history.push('/signin');
   };
 
+  const handleSaveMovie = (movie) => {
+    showPreloader();
+    postMovie(movie)
+      .then((newMovie) => {
+        setSavedMovies([newMovie, ...savedMovies]);
+      })
+      .catch((error) => {
+        setInfoTooltipProps({ isSuccess: false, message: error });
+        setIsInfoTooltipPopupOpen(true);
+      })
+      .finally(() => {
+        hidePreloader();
+      });
+  };
+
+  const handleDeleteMovie = (movieId) => {
+    const deletedMovie = findInMovies(savedMovies, movieId);
+    if (deleteMovie) {
+      showPreloader();
+      deleteMovie(deletedMovie._id)
+        .then(() => {
+          setSavedMovies(savedMovies.filter((movie) => movie._id !== deletedMovie._id));
+        })
+        .catch((error) => {
+          setInfoTooltipProps({ isSuccess: false, message: error });
+          setIsInfoTooltipPopupOpen(true);
+        })
+        .finally(() => {
+          hidePreloader();
+        });
+    }
+  };
+
   const handleSearchMovies = () => {
     showPreloader();
     getMovies()
       .then((res) => {
-        const filtered = filterMovies(res, localStorage.getItem('keyword'));
-        setMovies(filtered);
-        localStorage.setItem('movies', JSON.stringify(filtered));
+        setMovies(res);
+        localStorage.setItem('movies', JSON.stringify(res));
       })
       .catch(() => {
         localStorage.removeItem('movies');
@@ -134,10 +193,9 @@ const App = () => {
       });
   };
 
-  const filterMovies = (movies, keyword) =>
-    movies.filter((movie) => movie.nameRU.toLowerCase().includes(keyword.toLowerCase()));
-
-  const filterByShort = (movies) => movies.filter((movie) => movie.duration <= 40);
+  const handleSearchSavedMovies = () => {
+    // setFilteredSavedMovies(filterMovies(savedMovies, localStorage.getItem('keyword')));
+  };
 
   return (
     <div className='app'>
@@ -150,12 +208,22 @@ const App = () => {
           </Route>
           <ProtectedRoute exact path={'/movies'} redirectPath='/' redirectCondition={!loggedIn}>
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
-            <Movies movies={movies} filterByShort={filterByShort} onSearchMovies={handleSearchMovies} />
+            <Movies
+              movies={movies}
+              savedMovies={savedMovies}
+              onSaveMovie={handleSaveMovie}
+              onDeleteMovie={handleDeleteMovie}
+              onSearchMovies={handleSearchMovies}
+            />
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path={'/saved-movies'} redirectPath='/' redirectCondition={!loggedIn}>
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
-            <SavedMovies />
+            <SavedMovies
+              movies={savedMovies}
+              onDeleteMovie={handleDeleteMovie}
+              onSearchMovies={handleSearchSavedMovies}
+            />
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path={'/profile'} redirectPath='/' redirectCondition={!loggedIn}>
