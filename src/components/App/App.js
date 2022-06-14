@@ -68,9 +68,6 @@ const App = () => {
     localStorage.removeItem('isShortCheck');
     localStorage.removeItem('keyword');
     localStorage.removeItem('movies');
-    localStorage.removeItem('isShortCheckSaved');
-    localStorage.removeItem('keywordSaved');
-    localStorage.removeItem('moviesSaved');
   }, []);
 
   const closeInfoTooltip = () => {
@@ -193,10 +190,6 @@ const App = () => {
       });
   };
 
-  const handleSearchSavedMovies = () => {
-    // setFilteredSavedMovies(filterMovies(savedMovies, localStorage.getItem('keyword')));
-  };
-
   return (
     <div className='app'>
       <CurrentUserContext.Provider value={currentUser}>
@@ -219,11 +212,7 @@ const App = () => {
           </ProtectedRoute>
           <ProtectedRoute exact path={'/saved-movies'} redirectPath='/' redirectCondition={!loggedIn}>
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
-            <SavedMovies
-              movies={savedMovies}
-              onDeleteMovie={handleDeleteMovie}
-              onSearchMovies={handleSearchSavedMovies}
-            />
+            <SavedMovies movies={savedMovies} onDeleteMovie={handleDeleteMovie} />
             <Footer />
           </ProtectedRoute>
           <ProtectedRoute exact path={'/profile'} redirectPath='/' redirectCondition={!loggedIn}>

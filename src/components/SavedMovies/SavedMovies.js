@@ -3,12 +3,10 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import { filterByKeyword, filterByShort } from '../../utils/utils';
 
-const SavedMovies = ({ movies, onDeleteMovie, onSearchMovies }) => {
+const SavedMovies = ({ movies, onDeleteMovie }) => {
   const [filteredMovies, setFilteredMovies] = React.useState([]);
-  const [isShortCheck, setIsShortCheck] = React.useState(
-    JSON.parse(localStorage.getItem('isShortCheckSaved')) === true
-  );
-  const [keyword, setKeyword] = React.useState(localStorage.getItem('keywordSaved') || '');
+  const [isShortCheck, setIsShortCheck] = React.useState(false);
+  const [keyword, setKeyword] = React.useState('');
 
   React.useEffect(() => {
     setFilteredMovies(
@@ -25,9 +23,9 @@ const SavedMovies = ({ movies, onDeleteMovie, onSearchMovies }) => {
   };
 
   const handleSearchMovies = () => {
-    localStorage.setItem('keywordSaved', keyword);
-    localStorage.setItem('isShortCheckSaved', JSON.stringify(isShortCheck));
-    onSearchMovies();
+    setFilteredMovies(
+      isShortCheck ? filterByShort(filterByKeyword(movies, keyword)) : filterByKeyword(movies, keyword)
+    );
   };
 
   return (
