@@ -41,7 +41,7 @@ const Profile = ({ onEditProfile, onSignOut }) => {
 
     if (e.target.id === 'email') {
       e.target.setCustomValidity(
-        emailRegex.test(e.target.value) || e.target.value === '' ? '' : 'Некорректный адрес эл.почты'
+        emailRegex.test(e.target.value) ? '' : `${e.target.value === '' ? 'Поле email не должно быть пустым' : 'Некорректный адрес эл.почты'}`
       );
       values.email = e.target.value;
     }
