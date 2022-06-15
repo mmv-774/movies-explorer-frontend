@@ -3,15 +3,12 @@ import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
 const MoviesCard = ({ movie, isUserCard, isSavedCard, onSaveMovie, onDeleteMovie }) => {
-  const [isSaved, setIsSaved] = React.useState(isSavedCard);
-
   const handleCardButtonClick = () => {
-    if (isSaved) {
+    if (isSavedCard) {
       onDeleteMovie(movie.id || movie._id);
     } else {
       onSaveMovie(movie);
     }
-    setIsSaved(!isSaved);
   };
 
   const handleDeleteButtonClick = () => {
@@ -33,7 +30,7 @@ const MoviesCard = ({ movie, isUserCard, isSavedCard, onSaveMovie, onDeleteMovie
           onClick={handleDeleteButtonClick}
         ></button>
       );
-    if (isSaved)
+    if (isSavedCard)
       return (
         <button
           type='button'

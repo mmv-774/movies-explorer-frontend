@@ -88,7 +88,6 @@ export const postMovie = (movie) => {
 };
 
 export const deleteMovie = (movieId) => {
-    console.log(movieId);
   return _sendRequest(`/movies/${movieId}`, {
     method: 'DELETE',
     headers: _setHeaders(),
