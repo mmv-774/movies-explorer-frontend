@@ -21,7 +21,7 @@ const MoviesCardList = ({ isUserList, movies, savedMovies, onSaveMovie, onDelete
   }, [totalMovies, totalAddedMovies]);
 
   React.useEffect(() => {
-    setIsShowMoreButton(movies.length >= showedMovies.length + totalAddedMovies);
+    setIsShowMoreButton(movies.length > showedMovies.length);
   }, [showedMovies]);
 
   React.useEffect(() => {
