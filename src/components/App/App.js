@@ -142,7 +142,8 @@ const App = () => {
         setSavedMovies([newMovie, ...savedMovies]);
       })
       .catch((error) => {
-        setInfoTooltipProps({ isSuccess: false, message: error });
+        console.log(error);
+        setInfoTooltipProps({ isSuccess: false, message: 'Что-то пошло не так!' });
         setIsInfoTooltipPopupOpen(true);
       })
       .finally(() => {
@@ -159,7 +160,8 @@ const App = () => {
           setSavedMovies(savedMovies.filter((movie) => movie._id !== deletedMovie._id));
         })
         .catch((error) => {
-          setInfoTooltipProps({ isSuccess: false, message: error });
+          console.log(error);
+          setInfoTooltipProps({ isSuccess: false, message: 'Что-то пошло не так!' });
           setIsInfoTooltipPopupOpen(true);
         })
         .finally(() => {
