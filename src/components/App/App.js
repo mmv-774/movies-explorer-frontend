@@ -87,7 +87,7 @@ const App = () => {
     return register(name, email, password)
       .then(() => {
         setInfoTooltipProps({ isSuccess: true, message: 'Вы успешно зарегистрировались!' });
-        history.push('/movies');
+        handleLogin(email, password);
       })
       .catch((error) => {
         setInfoTooltipProps({ isSuccess: false, message: error });
