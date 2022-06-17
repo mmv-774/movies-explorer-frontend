@@ -58,17 +58,17 @@ const App = () => {
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      handleResponse(tokenCheck(), () => {
-        setLoggedIn(true);
-      });
+      handleResponse(tokenCheck(), () => setLoggedIn(true));
     }
   }, [history]);
 
   React.useEffect(() => {
-    localStorage.removeItem('isShortCheck');
-    localStorage.removeItem('keyword');
-    localStorage.removeItem('movies');
-  }, []);
+    if (loggedIn) {
+      handleResponse(getMovies(), (res) => setMovies(res), null, showPreloader, hidePreloader);
+    } else {
+      setMovies([]);
+    }
+  }, [loggedIn]);
 
   const closeInfoTooltip = () => {
     setIsInfoTooltipPopupOpen(false);
@@ -83,102 +83,100 @@ const App = () => {
   };
 
   const handleRegister = (name, email, password) => {
-    showPreloader();
-    return register(name, email, password)
-      .then(() => {
+    return handleResponse(
+      register(name, email, password),
+      () => {
         setInfoTooltipProps({ isSuccess: true, message: 'Вы успешно зарегистрировались!' });
-        handleLogin(email, password);
-      })
-      .catch((error) => {
-        setInfoTooltipProps({ isSuccess: false, message: error });
-      })
-      .finally(() => {
-        hidePreloader();
         setIsInfoTooltipPopupOpen(true);
-      });
+        handleLogin(email, password);
+      },
+      (error) => {
+        setInfoTooltipProps({ isSuccess: false, message: error });
+        setIsInfoTooltipPopupOpen(true);
+      },
+      showPreloader,
+      hidePreloader
+    );
   };
 
   const handleLogin = (email, password) => {
-    showPreloader();
-    return login(email, password)
-      .then((res) => {
+    return (
+      handleResponse(login(email, password), (res) => {
         localStorage.setItem('jwt', res.token);
         setLoggedIn(true);
         history.push('/movies');
-      })
-      .catch((error) => {
+      }),
+      (error) => {
         setInfoTooltipProps({ isSuccess: false, message: error });
         setIsInfoTooltipPopupOpen(true);
-      })
-      .finally(() => {
-        hidePreloader();
-      });
+      },
+      showPreloader,
+      hidePreloader
+    );
   };
 
   const handleEditProfile = (name, email) => {
-    showPreloader();
-    patchUserInfo(name, email)
-      .then((res) => {
+    return handleResponse(
+      patchUserInfo(name, email),
+      (res) => {
         setCurrentUser(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        hidePreloader();
-      });
+        setInfoTooltipProps({ isSuccess: true, message: 'Данные успешно изменены!' });
+        setIsInfoTooltipPopupOpen(true);
+      },
+      (error) => {
+        setInfoTooltipProps({ isSuccess: false, message: error });
+        setIsInfoTooltipPopupOpen(true);
+      },
+      showPreloader,
+      hidePreloader
+    );
   };
 
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('isShortCheck');
+    localStorage.removeItem('keyword');
     setLoggedIn(false);
-    history.push('/signin');
+    history.push('/');
   };
 
   const handleSaveMovie = (movie) => {
-    showPreloader();
-    postMovie(movie)
-      .then((newMovie) => {
-        setSavedMovies([newMovie, ...savedMovies]);
-      })
-      .catch((error) => {
-        console.log(error);
+    return handleResponse(
+      postMovie(movie),
+      () => setSavedMovies([newMovie, ...savedMovies]),
+      () => {
         setInfoTooltipProps({ isSuccess: false, message: 'Что-то пошло не так!' });
         setIsInfoTooltipPopupOpen(true);
-      })
-      .finally(() => {
-        hidePreloader();
-      });
+      },
+      showPreloader,
+      hidePreloader
+    );
   };
 
   const handleDeleteMovie = (movieId) => {
     const deletedMovie = findInMovies(savedMovies, movieId);
     if (deleteMovie) {
-      showPreloader();
-      deleteMovie(deletedMovie._id)
-        .then(() => {
-          setSavedMovies(savedMovies.filter((movie) => movie._id !== deletedMovie._id));
-        })
-        .catch((error) => {
-          console.log(error);
+      return (
+        handleResponse(deletedMovie(deletedMovie._id), () =>
+          setSavedMovies(savedMovies.filter((movie) => movie._id !== deletedMovie._id))
+        ),
+        () => {
           setInfoTooltipProps({ isSuccess: false, message: 'Что-то пошло не так!' });
           setIsInfoTooltipPopupOpen(true);
-        })
-        .finally(() => {
-          hidePreloader();
-        });
+        },
+        showPreloader,
+        hidePreloader
+      );
     }
   };
 
   const handleSearchMovies = () => {
-    showPreloader();
-    getMovies()
-      .then((res) => {
-        setMovies(res);
-        localStorage.setItem('movies', JSON.stringify(res));
-      })
-      .catch(() => {
-        localStorage.removeItem('movies');
+    if (movies && movies.length) return;
+
+    handleResponse(
+      getMovies(),
+      (res) => setMovies(res),
+      () => {
         setMovies([]);
         setInfoTooltipProps({
           isSuccess: false,
@@ -186,10 +184,10 @@ const App = () => {
             'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
         });
         setIsInfoTooltipPopupOpen(true);
-      })
-      .finally(() => {
-        hidePreloader();
-      });
+      },
+      showPreloader,
+      hidePreloader
+    );
   };
 
   return (

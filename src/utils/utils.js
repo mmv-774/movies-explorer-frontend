@@ -1,5 +1,15 @@
-export const handleResponse = (executor, fulfilledCallback) => {
-  executor.then((res) => fulfilledCallback(res)).catch((error) => console.log(error));
+export const handleResponse = (
+  executor,
+  fulfilledCallback,
+  rejectedCallback = null,
+  onShowPreloader = null,
+  onHidePreloader = null
+) => {
+  onShowPreloader && onShowPreloader();
+  executor
+    .then((res) => fulfilledCallback(res))
+    .catch((error) => (rejectedCallback ? rejectedCallback(error) : console.log(error)))
+    .finally(() => onHidePreloader && onHidePreloader());
 };
 
 export const filterByKeyword = (movies, keyword) =>
@@ -7,4 +17,4 @@ export const filterByKeyword = (movies, keyword) =>
 
 export const filterByShort = (movies) => movies.filter((movie) => movie.duration <= 40);
 
-export const findInMovies = (movies, movieId) => movies.find((m) => m._id === movieId || m.movieId === movieId); 
+export const findInMovies = (movies, movieId) => movies.find((m) => m._id === movieId || m.movieId === movieId);
