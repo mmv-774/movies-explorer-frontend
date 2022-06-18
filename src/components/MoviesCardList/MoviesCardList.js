@@ -4,7 +4,7 @@ import useCurrentWidth from '../../utils/hooks/useCurrentWidth';
 import { findInMovies } from '../../utils/utils';
 import './MoviesCardList.css';
 
-const MoviesCardList = ({ isUserList, movies, savedMovies, onSaveMovie, onDeleteMovie }) => {
+const MoviesCardList = ({ isUserList, isNotFoundShow, movies, savedMovies, onSaveMovie, onDeleteMovie }) => {
   const [showedMovies, setShowedMovies] = React.useState([]);
   const [totalMovies, setTotalMovies] = React.useState(12);
   const [totalAddedMovies, setTotalAddedMovies] = React.useState(3);
@@ -71,7 +71,7 @@ const MoviesCardList = ({ isUserList, movies, savedMovies, onSaveMovie, onDelete
             ))}
           </ul>
         ) : (
-          <p className='movies-cards__not-found'>Ничего не найдено</p>
+          isNotFoundShow && <p className='movies-cards__not-found'>Ничего не найдено</p>
         )}
         <div className='movies-cards__button-container'>
           {isShowMoreButton && (

@@ -7,12 +7,16 @@ const Movies = ({ movies, savedMovies, onSaveMovie, onDeleteMovie, onSearchMovie
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [isShortCheck, setIsShortCheck] = React.useState(JSON.parse(localStorage.getItem('isShortCheck')) === true);
   const [keyword, setKeyword] = React.useState(localStorage.getItem('keyword') || '');
+  const [isNotFoundShow, setIsNotFoundShow] = React.useState(false);
 
   React.useEffect(() => {
-    setFilteredMovies(
-      isShortCheck ? filterByShort(filterByKeyword(movies, keyword)) : filterByKeyword(movies, keyword)
-    );
+    setFilteredMovies(filterMovies());
   }, [movies]);
+
+  const filterMovies = () => {
+    if (!keyword) return [];
+    return isShortCheck ? filterByShort(filterByKeyword(movies, keyword)) : filterByKeyword(movies, keyword);
+  };
 
   const handleKeywordChange = (value) => {
     setKeyword(value);
@@ -26,6 +30,8 @@ const Movies = ({ movies, savedMovies, onSaveMovie, onDeleteMovie, onSearchMovie
     localStorage.setItem('keyword', keyword);
     localStorage.setItem('isShortCheck', JSON.stringify(isShortCheck));
     onSearchMovies();
+    setFilteredMovies(filterMovies());
+    setIsNotFoundShow(true);
   };
 
   return (
@@ -39,6 +45,7 @@ const Movies = ({ movies, savedMovies, onSaveMovie, onDeleteMovie, onSearchMovie
       />
       <MoviesCardList
         isUserList={false}
+        isNotFoundShow={isNotFoundShow}
         movies={filteredMovies}
         savedMovies={savedMovies}
         onSaveMovie={onSaveMovie}

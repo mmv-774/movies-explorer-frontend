@@ -30,6 +30,7 @@ import './App.css';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isTokenValidated, setIsTokenValidated] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isPreloaderShow, setIsPreloaderShow] = React.useState(false);
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
@@ -38,6 +39,23 @@ const App = () => {
   const [savedMovies, setSavedMovies] = React.useState([]);
 
   const history = useHistory();
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      handleResponse(
+        tokenCheck(),
+        () => {
+          setLoggedIn(true);
+          setIsTokenValidated(true);
+        },
+        () => {
+          setLoggedIn(false);
+          setIsTokenValidated(true);
+        }
+      );
+    }
+  }, []);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -54,13 +72,6 @@ const App = () => {
       setSavedMovies([]);
     }
   }, [loggedIn]);
-
-  React.useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      handleResponse(tokenCheck(), () => setLoggedIn(true));
-    }
-  }, [history]);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -190,7 +201,16 @@ const App = () => {
     );
   };
 
-  return (
+  const renderPreloader = (isShow) => (
+    <>
+      <Preloader isShow={isShow} />
+      <Backdrop isShow={isShow} />
+    </>
+  );
+
+  return !isTokenValidated ? (
+    renderPreloader(true)
+  ) : (
     <div className='app'>
       <CurrentUserContext.Provider value={currentUser}>
         <Switch>
@@ -235,8 +255,7 @@ const App = () => {
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeInfoTooltip}
         />
-        <Preloader isShow={isPreloaderShow} />
-        <Backdrop isShow={isPreloaderShow} />
+        {renderPreloader(isPreloaderShow)}
       </CurrentUserContext.Provider>
     </div>
   );
