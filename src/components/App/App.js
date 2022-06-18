@@ -157,7 +157,7 @@ const App = () => {
   const handleSaveMovie = (movie) => {
     return handleResponse(
       postMovie(movie),
-      () => setSavedMovies([newMovie, ...savedMovies]),
+      (res) => setSavedMovies([res, ...savedMovies]),
       () => {
         setInfoTooltipProps({ isSuccess: false, message: 'Что-то пошло не так!' });
         setIsInfoTooltipPopupOpen(true);
