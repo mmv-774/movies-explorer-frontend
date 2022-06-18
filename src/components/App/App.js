@@ -114,12 +114,13 @@ const App = () => {
   };
 
   const handleLogin = (email, password) => {
-    return (
-      handleResponse(login(email, password), (res) => {
+    return handleResponse(
+      login(email, password),
+      (res) => {
         localStorage.setItem('jwt', res.token);
         setLoggedIn(true);
         history.push('/movies');
-      }),
+      },
       (error) => {
         setInfoTooltipProps({ isSuccess: false, message: error });
         setIsInfoTooltipPopupOpen(true);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
 const MoviesCard = ({ movie, isUserCard, isSavedCard, onSaveMovie, onDeleteMovie }) => {
