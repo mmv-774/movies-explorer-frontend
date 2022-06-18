@@ -54,6 +54,9 @@ const App = () => {
           setIsTokenValidated(true);
         }
       );
+    } else {
+      setLoggedIn(false);
+      setIsTokenValidated(true);
     }
   }, []);
 
@@ -67,11 +70,11 @@ const App = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
-      handleResponse(getSavedMovies(), (res) => setSavedMovies(res.movies));
+      handleResponse(getSavedMovies(), (res) => setSavedMovies(res.movies.filter((m) => m.owner === currentUser._id)));
     } else {
       setSavedMovies([]);
     }
-  }, [loggedIn]);
+  }, [loggedIn, currentUser]);
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -239,15 +242,15 @@ const App = () => {
             <Header loggedIn={loggedIn} backgroundColor={'light'} />
             <Profile onEditProfile={handleEditProfile} onSignOut={handleSignOut} />
           </ProtectedRoute>
-          <Route path='/signin'>
+          <ProtectedRoute path='/signin' redirectPath='/' redirectCondition={loggedIn}>
             <Login onLogin={handleLogin} />
-          </Route>
-          <Route path='/signup'>
+          </ProtectedRoute>
+          <ProtectedRoute path='/signup' redirectPath='/' redirectCondition={loggedIn}>
             <Register onRegister={handleRegister} />
-          </Route>
-          <Route path='*'>
+          </ProtectedRoute>
+          <ProtectedRoute path='*' redirectPath='/' redirectCondition={!loggedIn}>
             <NotFound />
-          </Route>
+          </ProtectedRoute>
         </Switch>
         <InfoTooltip
           isSuccess={infoTooltipProps.isSuccess}
