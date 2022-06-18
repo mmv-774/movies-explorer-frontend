@@ -169,9 +169,9 @@ const App = () => {
 
   const handleDeleteMovie = (movieId) => {
     const deletedMovie = findInMovies(savedMovies, movieId);
-    if (deleteMovie) {
+    if (deletedMovie) {
       return (
-        handleResponse(deletedMovie(deletedMovie._id), () =>
+        handleResponse(deleteMovie(deletedMovie._id), () =>
           setSavedMovies(savedMovies.filter((movie) => movie._id !== deletedMovie._id))
         ),
         () => {
