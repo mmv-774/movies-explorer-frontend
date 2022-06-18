@@ -2,12 +2,20 @@ import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import useCurrentWidth from '../../utils/hooks/useCurrentWidth';
 import { findInMovies } from '../../utils/utils';
+import {
+  LG_TOTAL_MOVIES,
+  LG_ADDED_MOVIES,
+  MD_TOTAL_MOVIES,
+  MD_ADDED_MOVIES,
+  SM_TOTAL_MOVIES,
+  SM_ADDED_MOVIES,
+} from '../../utils/constants';
 import './MoviesCardList.css';
 
 const MoviesCardList = ({ isUserList, isNotFoundShow, movies, savedMovies, onSaveMovie, onDeleteMovie }) => {
   const [showedMovies, setShowedMovies] = React.useState([]);
-  const [totalMovies, setTotalMovies] = React.useState(12);
-  const [totalAddedMovies, setTotalAddedMovies] = React.useState(3);
+  const [totalMovies, setTotalMovies] = React.useState(LG_TOTAL_MOVIES);
+  const [totalAddedMovies, setTotalAddedMovies] = React.useState(LG_ADDED_MOVIES);
   const [isShowMoreButton, setIsShowMoreButton] = React.useState(false);
 
   let width = useCurrentWidth();
@@ -31,20 +39,20 @@ const MoviesCardList = ({ isUserList, isNotFoundShow, movies, savedMovies, onSav
 
   const calcMoviesGridSize = () => {
     if (width >= 1280) {
-      setTotalMovies(12);
-      setTotalAddedMovies(3);
+      setTotalMovies(LG_TOTAL_MOVIES);
+      setTotalAddedMovies(LG_ADDED_MOVIES);
       return;
     }
 
     if (width >= 768 && width < 1280) {
-      setTotalMovies(8);
-      setTotalAddedMovies(2);
+      setTotalMovies(MD_TOTAL_MOVIES);
+      setTotalAddedMovies(MD_ADDED_MOVIES);
       return;
     }
 
     if (width < 768) {
-      setTotalMovies(5);
-      setTotalAddedMovies(2);
+      setTotalMovies(SM_TOTAL_MOVIES);
+      setTotalAddedMovies(SM_ADDED_MOVIES);
     }
   };
 
